@@ -1,7 +1,43 @@
 #include "storagestatereader.h"
+#include "storagestate.h"
+
+#include <QtSystemDetection>
+
+namespace {
+
+#if defined(Q_OS_WIN)
+constexpr bool isUnixoid = false;
+#elif defined(Q_OS_LINUX) || defined(Q_OS_MACOS)
+constexpr bool isUnixoid = true;
+#endif
+
+QString getDeviceName(const QStorageInfo &sInfo)
+{
+    if (isUnixoid) {
+        return QString(sInfo.device());
+    } else {
+        return sInfo.rootPath();
+    }
+}
+
+} // namespace
 
 namespace sysinfoagent {
 
-StorageStateReader::StorageStateReader() {}
+std::unique_ptr<core::JsonSerializable> StorageStateReader::readState()
+{
+    const QList<QStorageInfo> storageInfos = QStorageInfo::mountedVolumes();
+    std::map<QByteArray, DriveState> drives;
+    for (const QStorageInfo &sInfo : storageInfos) {
+        drives.emplace(std::make_pair(sInfo.device(),
+                                      DriveState(getDeviceName(sInfo),
+                                                 sInfo.rootPath(),
+                                                 sInfo.name(),
+                                                 sInfo.bytesTotal(),
+                                                 sInfo.bytesAvailable())));
+    }
+
+    return std::make_unique<StorageState>(std::move(drives));
+}
 
 } // namespace sysinfoagent

@@ -1,3 +1,5 @@
+#include "storagestatereader.h"
+#include <iostream>
 #include <QCoreApplication>
 
 int main(int argc, char *argv[])
@@ -15,5 +17,14 @@ int main(int argc, char *argv[])
     // If you do not need a running Qt event loop, remove the call
     // to QCoreApplication::exec() or use the Non-Qt Plain C++ Application template.
 
-    return QCoreApplication::exec();
+    sysinfoagent::StorageStateReader reader{};
+
+    auto state = reader.readState();
+
+    auto json = state->asJson();
+
+    std::cout << json.toJson().toStdString();
+
+    // return QCoreApplication::exec();
+    return 0;
 }

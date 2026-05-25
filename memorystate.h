@@ -13,4 +13,4 @@ public:
 
 } // namespace sysinfoagent
 
-#endif //MEMORYSTATE_H
+#endif // MEMORYSTATE_H

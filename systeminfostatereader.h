@@ -2,13 +2,14 @@
 #define SYSTEMINFOSTATEREADER_H
 
 #include "core/jsonserializable.h"
+#include <memory>
 
 namespace sysinfoagent {
 
 class SystemInfoStateReader
 {
 public:
-    virtual core::JsonSerializable readState() = 0;
+    virtual std::unique_ptr<core::JsonSerializable> readState() = 0;
 };
 
 } // namespace sysinfoagent
