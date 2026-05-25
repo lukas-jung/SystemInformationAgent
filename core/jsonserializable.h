@@ -1,16 +1,14 @@
 #ifndef JSONSERIALIZABLE_H
 #define JSONSERIALIZABLE_H
 
-#include <variant>
-#include <QJsonArray>
-#include <QJsonObject>
+#include <QJsonValue>
 
 namespace core {
 
 class JsonSerializable
 {
 public:
-    virtual std::variant<QJsonObject, QJsonArray> as_json() = 0;
+    virtual QJsonValue as_json() = 0;
     virtual ~JsonSerializable() = 0;
 };
 
