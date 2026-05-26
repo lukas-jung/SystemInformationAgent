@@ -14,6 +14,14 @@ DriveState::DriveState(
     , bytesAvailable_(bytesAvailable)
 {}
 
+DriveState::DriveState(const QJsonObject &jo)
+    : deviceName_(jo["deviceName"].toString(""))
+    , path_(jo["path"].toString(""))
+    , label_(jo["label"].toString(""))
+    , bytesTotal_(jo["bytesTotal"].toString("-1").toLongLong())
+    , bytesAvailable_(jo["bytesAvailable"].toString("-1").toLongLong())
+{}
+
 QJsonValue DriveState::asJson()
 {
     // bytesTotal and bytesAvailable are strings because json only has 64-bit floats which can't safely store sizes over ~8000TiB
@@ -34,6 +42,13 @@ StorageState::StorageState(const std::map<QString, DriveState> &drives)
 StorageState::StorageState(std::map<QString, DriveState> &&drives)
     : drives_(std::move(drives))
 {}
+
+StorageState::StorageState(const QJsonObject &jo)
+{
+    for (QJsonObject::const_iterator it = jo.begin(); it != jo.end(); ++it) {
+        drives_.emplace(std::make_pair(it.key(), DriveState(it.value().toObject())));
+    }
+}
 
 QJsonValue StorageState::asJson()
 {

@@ -1,6 +1,8 @@
+#include "storagestate.h"
 #include "storagestatereader.h"
 #include <iostream>
 #include <QCoreApplication>
+#include <QJsonObject>
 
 int main(int argc, char *argv[])
 {
@@ -18,12 +20,20 @@ int main(int argc, char *argv[])
     // to QCoreApplication::exec() or use the Non-Qt Plain C++ Application template.
 
     sysinfoagent::StorageStateReader reader{};
+    auto state1 = reader.readState();
 
-    auto state = reader.readState();
+    auto jv1 = state1->asJson();
+    auto js1 = jv1.toJson().toStdString();
+    std::cout << js1 << std::endl;
 
-    auto json = state->asJson();
+    auto jvp = QJsonValue::fromJson(js1);
+    sysinfoagent::StorageState state2(jvp.toObject());
 
-    std::cout << json.toJson().toStdString();
+    auto jv2 = state2.asJson();
+    auto js2 = jv2.toJson().toStdString();
+    std::cout << js2 << std::endl;
+
+    std::cout << (js1 == js2);
 
     // return QCoreApplication::exec();
     return 0;

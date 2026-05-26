@@ -10,6 +10,7 @@ class DriveState : public core::JsonSerializable
 public:
     DriveState(
         QString deviceName, QString path, QString label, qint64 bytesTotal, qint64 bytesAvailable);
+    explicit DriveState(const QJsonObject &jo);
 
     ~DriveState() override = default;
     QJsonValue asJson() override;
@@ -27,6 +28,7 @@ class StorageState : public core::JsonSerializable
 public:
     explicit StorageState(const std::map<QString, DriveState> &drives);
     explicit StorageState(std::map<QString, DriveState> &&drives);
+    explicit StorageState(const QJsonObject &jo);
     ~StorageState() override = default;
     QJsonValue asJson() override;
 
