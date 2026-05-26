@@ -27,11 +27,11 @@ QJsonValue DriveState::asJson()
     });
 }
 
-StorageState::StorageState(const std::map<QByteArray, DriveState> &drives)
+StorageState::StorageState(const std::map<QString, DriveState> &drives)
     : drives_(drives)
 {}
 
-StorageState::StorageState(std::map<QByteArray, DriveState> &&drives)
+StorageState::StorageState(std::map<QString, DriveState> &&drives)
     : drives_(std::move(drives))
 {}
 

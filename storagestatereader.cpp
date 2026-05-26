@@ -27,9 +27,11 @@ namespace sysinfoagent {
 std::unique_ptr<core::JsonSerializable> StorageStateReader::readState()
 {
     const QList<QStorageInfo> storageInfos = QStorageInfo::mountedVolumes();
-    std::map<QByteArray, DriveState> drives;
+    std::map<QString, DriveState> drives;
     for (const QStorageInfo &sInfo : storageInfos) {
-        drives.emplace(std::make_pair(sInfo.device(),
+        const QString deviceIdString = sInfo.device().toBase64();
+
+        drives.emplace(std::make_pair(deviceIdString,
                                       DriveState(getDeviceName(sInfo),
                                                  sInfo.rootPath(),
                                                  sInfo.name(),

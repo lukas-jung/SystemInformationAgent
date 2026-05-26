@@ -25,13 +25,13 @@ private:
 class StorageState : public core::JsonSerializable
 {
 public:
-    explicit StorageState(const std::map<QByteArray, DriveState> &drives);
-    explicit StorageState(std::map<QByteArray, DriveState> &&drives);
+    explicit StorageState(const std::map<QString, DriveState> &drives);
+    explicit StorageState(std::map<QString, DriveState> &&drives);
     ~StorageState() override = default;
     QJsonValue asJson() override;
 
 private:
-    std::map<QByteArray, DriveState> drives_;
+    std::map<QString, DriveState> drives_;
 };
 
 } // namespace sysinfoagent
