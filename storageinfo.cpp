@@ -1,4 +1,4 @@
-#include "storagestate.h"
+#include "storageinfo.h"
 
 #include <utility>
 #include <QJsonObject>
