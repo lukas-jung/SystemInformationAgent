@@ -2,6 +2,6 @@
 
 namespace sysinfoagent {
 
-MemoryStateReader::MemoryStateReader() {}
+MemoryInfoReader::MemoryInfoReader() {}
 
 } // namespace sysinfoagent

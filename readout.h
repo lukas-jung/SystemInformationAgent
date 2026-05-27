@@ -5,7 +5,7 @@
 
 namespace sysinfoagent {
 
-class Readout : public core::JsonSerializable
+class SystemInfo : public core::JsonSerializable
 {};
 
 } // namespace sysinfoagent

@@ -19,17 +19,17 @@ int main(int argc, char *argv[])
     // If you do not need a running Qt event loop, remove the call
     // to QCoreApplication::exec() or use the Non-Qt Plain C++ Application template.
 
-    sysinfoagent::StorageStateReader reader{};
-    auto state1 = reader.readState();
+    sysinfoagent::StorageInfoReader reader{};
+    auto info1 = reader.readInfo();
 
-    auto jv1 = state1->asJson();
+    auto jv1 = info1->asJson();
     auto js1 = jv1.toJson().toStdString();
     std::cout << js1 << std::endl;
 
     auto jvp = QJsonValue::fromJson(js1);
-    sysinfoagent::StorageState state2(jvp.toObject());
+    sysinfoagent::StorageInfo info2(jvp.toObject());
 
-    auto jv2 = state2.asJson();
+    auto jv2 = info2.asJson();
     auto js2 = jv2.toJson().toStdString();
     std::cout << js2 << std::endl;
 

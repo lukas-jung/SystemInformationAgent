@@ -25,7 +25,7 @@ QString getDeviceName(const QStorageInfo &sInfo)
 
 namespace sysinfoagent {
 
-std::unique_ptr<Readout> StorageStateReader::readState()
+std::unique_ptr<SystemInfo> StorageInfoReader::readInfo()
 {
     const QList<QStorageInfo> storageInfos = QStorageInfo::mountedVolumes();
     std::map<QString, DriveState> drives;
@@ -40,7 +40,7 @@ std::unique_ptr<Readout> StorageStateReader::readState()
                                                  sInfo.bytesAvailable())));
     }
 
-    return std::make_unique<StorageState>(std::move(drives));
+    return std::make_unique<StorageInfo>(std::move(drives));
 }
 
 } // namespace sysinfoagent

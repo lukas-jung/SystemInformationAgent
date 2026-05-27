@@ -9,8 +9,7 @@ namespace sysinfoagent {
 class DriveState : public core::JsonSerializable
 {
 public:
-    DriveState(
-        QString deviceName, QString path, QString label, qint64 bytesTotal, qint64 bytesAvailable);
+    DriveState(QString deviceName, QString path, QString label, qint64 bytesTotal, qint64 bytesAvailable);
     explicit DriveState(const QJsonObject &jo);
 
     ~DriveState() override = default;
@@ -24,13 +23,13 @@ private:
     qint64 bytesAvailable_;
 };
 
-class StorageState : public Readout
+class StorageInfo : public SystemInfo
 {
 public:
-    explicit StorageState(const std::map<QString, DriveState> &drives);
-    explicit StorageState(std::map<QString, DriveState> &&drives);
-    explicit StorageState(const QJsonObject &jo);
-    ~StorageState() override = default;
+    explicit StorageInfo(const std::map<QString, DriveState> &drives);
+    explicit StorageInfo(std::map<QString, DriveState> &&drives);
+    explicit StorageInfo(const QJsonObject &jo);
+    ~StorageInfo() override = default;
     QJsonValue asJson() override;
 
 private:

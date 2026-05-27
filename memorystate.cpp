@@ -2,6 +2,6 @@
 
 namespace sysinfoagent {
 
-MemoryState::MemoryState() {}
+MemoryInfo::MemoryInfo() {}
 
 } // namespace sysinfoagent

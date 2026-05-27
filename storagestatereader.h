@@ -6,11 +6,11 @@
 
 namespace sysinfoagent {
 
-class StorageStateReader : public SystemInfoStateReader
+class StorageInfoReader : public SystemInfoReader
 {
 public:
-    StorageStateReader() = default;
-    std::unique_ptr<Readout> readState() override;
+    StorageInfoReader() = default;
+    std::unique_ptr<SystemInfo> readInfo() override;
 };
 
 } // namespace sysinfoagent

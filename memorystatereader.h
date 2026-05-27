@@ -5,10 +5,10 @@
 
 namespace sysinfoagent {
 
-class MemoryStateReader : public SystemInfoStateReader
+class MemoryInfoReader : public SystemInfoReader
 {
 public:
-    MemoryStateReader();
+    MemoryInfoReader();
 };
 
 } // namespace sysinfoagent

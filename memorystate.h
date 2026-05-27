@@ -1,14 +1,14 @@
 #ifndef MEMORYSTATE_H
 #define MEMORYSTATE_H
 
-#include "core/jsonserializable.h"
+#include "readout.h"
 
 namespace sysinfoagent {
 
-class MemoryState : public core::JsonSerializable
+class MemoryInfo : public SystemInfo
 {
 public:
-    MemoryState();
+    MemoryInfo();
 };
 
 } // namespace sysinfoagent

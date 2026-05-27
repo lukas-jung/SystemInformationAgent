@@ -6,10 +6,10 @@
 
 namespace sysinfoagent {
 
-class SystemInfoStateReader
+class SystemInfoReader
 {
 public:
-    virtual std::unique_ptr<Readout> readState() = 0;
+    virtual std::unique_ptr<SystemInfo> readInfo() = 0;
 };
 
 } // namespace sysinfoagent
