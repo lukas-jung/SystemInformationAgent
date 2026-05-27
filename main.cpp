@@ -1,5 +1,5 @@
-#include "storagestate.h"
-#include "storagestatereader.h"
+#include "storageinfo.h"
+#include "storageinforeader.h"
 #include <iostream>
 #include <QCoreApplication>
 #include <QJsonObject>

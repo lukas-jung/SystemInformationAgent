@@ -1,7 +1,7 @@
-#ifndef MEMORYSTATE_H
-#define MEMORYSTATE_H
+#ifndef MEMORYINFO_H
+#define MEMORYINFO_H
 
-#include "readout.h"
+#include "systeminfo.h"
 
 namespace sysinfoagent {
 
@@ -13,4 +13,4 @@ public:
 
 } // namespace sysinfoagent
 
-#endif // MEMORYSTATE_H
+#endif // MEMORYINFO_H

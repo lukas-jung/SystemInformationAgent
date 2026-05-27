@@ -1,5 +1,5 @@
-#ifndef READOUT_H
-#define READOUT_H
+#ifndef SYSTEMINFO_H
+#define SYSTEMINFO_H
 
 #include "core/jsonserializable.h"
 
@@ -10,4 +10,4 @@ class SystemInfo : public core::JsonSerializable
 
 } // namespace sysinfoagent
 
-#endif // READOUT_H
+#endif // SYSTEMINFO_H

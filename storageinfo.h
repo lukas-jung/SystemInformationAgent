@@ -1,8 +1,8 @@
-#ifndef STORAGESTATE_H
-#define STORAGESTATE_H
+#ifndef STORAGEINFO_H
+#define STORAGEINFO_H
 
 #include "core/jsonserializable.h"
-#include "readout.h"
+#include "systeminfo.h"
 
 namespace sysinfoagent {
 
@@ -38,4 +38,4 @@ private:
 
 } // namespace sysinfoagent
 
-#endif // STORAGESTATE_H
+#endif // STORAGEINFO_H

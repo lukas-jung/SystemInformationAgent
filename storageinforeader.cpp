@@ -1,5 +1,5 @@
-#include "storagestatereader.h"
-#include "storagestate.h"
+#include "storageinforeader.h"
+#include "storageinfo.h"
 
 #include <QStorageInfo>
 #include <QtSystemDetection>

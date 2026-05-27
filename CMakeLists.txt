@@ -11,12 +11,12 @@ qt_standard_project_setup()
 qt_add_executable(SystemInformationAgent
     main.cpp
     core/jsonserializable.h
-    systeminfostatereader.h
-    memorystate.h memorystate.cpp
-    memorystatereader.h memorystatereader.cpp
-    storagestate.h storagestate.cpp
-    storagestatereader.h storagestatereader.cpp
-    readout.h
+    systeminforeader.h
+    memoryinfo.h memoryinfo.cpp
+    memoryinforeader.h memoryinforeader.cpp
+    storageinfo.h storageinfo.cpp
+    storageinforeader.h storageinforeader.cpp
+    systeminfo.h
 )
 
 target_link_libraries(SystemInformationAgent

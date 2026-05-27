@@ -1,7 +1,7 @@
-#ifndef MEMORYSTATEREADER_H
-#define MEMORYSTATEREADER_H
+#ifndef MEMORYINFOREADER_H
+#define MEMORYINFOREADER_H
 
-#include "systeminfostatereader.h"
+#include "systeminforeader.h"
 
 namespace sysinfoagent {
 
@@ -13,4 +13,4 @@ public:
 
 } // namespace sysinfoagent
 
-#endif // MEMORYSTATEREADER_H
+#endif // MEMORYINFOREADER_H

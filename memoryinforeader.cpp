@@ -1,4 +1,4 @@
-#include "memorystatereader.h"
+#include "memoryinforeader.h"
 
 namespace sysinfoagent {
 

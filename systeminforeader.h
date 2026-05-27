@@ -1,7 +1,7 @@
-#ifndef SYSTEMINFOSTATEREADER_H
-#define SYSTEMINFOSTATEREADER_H
+#ifndef SYSTEMINFOREADER_H
+#define SYSTEMINFOREADER_H
 
-#include "readout.h"
+#include "systeminfo.h"
 #include <memory>
 
 namespace sysinfoagent {
@@ -14,4 +14,4 @@ public:
 
 } // namespace sysinfoagent
 
-#endif // SYSTEMINFOSTATEREADER_H
+#endif // SYSTEMINFOREADER_H

@@ -1,4 +1,4 @@
-#include "memorystate.h"
+#include "memoryinfo.h"
 
 namespace sysinfoagent {
 

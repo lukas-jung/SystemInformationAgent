@@ -1,8 +1,8 @@
-#ifndef STORAGESTATEREADER_H
-#define STORAGESTATEREADER_H
+#ifndef STORAGEINFOREADER_H
+#define STORAGEINFOREADER_H
 
-#include "readout.h"
-#include "systeminfostatereader.h"
+#include "systeminfo.h"
+#include "systeminforeader.h"
 
 namespace sysinfoagent {
 
@@ -15,4 +15,4 @@ public:
 
 } // namespace sysinfoagent
 
-#endif // STORAGESTATEREADER_H
+#endif // STORAGEINFOREADER_H
