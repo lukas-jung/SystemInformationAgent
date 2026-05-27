@@ -1,6 +1,7 @@
 #include "storagestatereader.h"
 #include "storagestate.h"
 
+#include <QStorageInfo>
 #include <QtSystemDetection>
 
 namespace {
@@ -24,7 +25,7 @@ QString getDeviceName(const QStorageInfo &sInfo)
 
 namespace sysinfoagent {
 
-std::unique_ptr<core::JsonSerializable> StorageStateReader::readState()
+std::unique_ptr<Readout> StorageStateReader::readState()
 {
     const QList<QStorageInfo> storageInfos = QStorageInfo::mountedVolumes();
     std::map<QString, DriveState> drives;

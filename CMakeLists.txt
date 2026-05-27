@@ -16,6 +16,7 @@ qt_add_executable(SystemInformationAgent
     memorystatereader.h memorystatereader.cpp
     storagestate.h storagestate.cpp
     storagestatereader.h storagestatereader.cpp
+    readout.h
 )
 
 target_link_libraries(SystemInformationAgent

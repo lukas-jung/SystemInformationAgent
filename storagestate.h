@@ -2,6 +2,7 @@
 #define STORAGESTATE_H
 
 #include "core/jsonserializable.h"
+#include "readout.h"
 
 namespace sysinfoagent {
 
@@ -23,7 +24,7 @@ private:
     qint64 bytesAvailable_;
 };
 
-class StorageState : public core::JsonSerializable
+class StorageState : public Readout
 {
 public:
     explicit StorageState(const std::map<QString, DriveState> &drives);

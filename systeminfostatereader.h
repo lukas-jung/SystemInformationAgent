@@ -1,7 +1,7 @@
 #ifndef SYSTEMINFOSTATEREADER_H
 #define SYSTEMINFOSTATEREADER_H
 
-#include "core/jsonserializable.h"
+#include "readout.h"
 #include <memory>
 
 namespace sysinfoagent {
@@ -9,7 +9,7 @@ namespace sysinfoagent {
 class SystemInfoStateReader
 {
 public:
-    virtual std::unique_ptr<core::JsonSerializable> readState() = 0;
+    virtual std::unique_ptr<Readout> readState() = 0;
 };
 
 } // namespace sysinfoagent
