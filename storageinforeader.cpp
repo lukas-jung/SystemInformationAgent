@@ -1,6 +1,7 @@
 #include "storageinforeader.h"
 #include "storageinfo.h"
 
+#include <map>
 #include <QStorageInfo>
 #include <QtSystemDetection>
 
@@ -24,6 +25,11 @@ QString getDeviceName(const QStorageInfo &sInfo)
 } // namespace
 
 namespace sysinfoagent {
+
+const std::u16string_view StorageInfoReader::identifier()
+{
+    return StorageInfo::identifier;
+}
 
 std::unique_ptr<SystemInfo> StorageInfoReader::readInfo()
 {

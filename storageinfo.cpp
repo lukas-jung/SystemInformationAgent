@@ -22,7 +22,7 @@ DriveState::DriveState(const QJsonObject &jo)
     , bytesAvailable_(jo["bytesAvailable"].toString("-1").toLongLong())
 {}
 
-QJsonValue DriveState::asJson()
+QJsonValue DriveState::asJson() const
 {
     // bytesTotal and bytesAvailable are strings because json only has 64-bit floats which can't safely store sizes over ~8000TiB
 
@@ -50,7 +50,7 @@ StorageInfo::StorageInfo(const QJsonObject &jo)
     }
 }
 
-QJsonValue StorageInfo::asJson()
+QJsonValue StorageInfo::asJson() const
 {
     QJsonObject jo;
     for (auto &p : drives_) {

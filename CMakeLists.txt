@@ -17,6 +17,10 @@ qt_add_executable(SystemInformationAgent
     storageinfo.h storageinfo.cpp
     storageinforeader.h storageinforeader.cpp
     systeminfo.h
+    systeminfojsonparser.h
+    storagejsonparser.h
+    message.h message.cpp
+    poller.h poller.cpp
 )
 
 target_link_libraries(SystemInformationAgent

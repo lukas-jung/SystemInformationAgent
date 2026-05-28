@@ -10,6 +10,7 @@ class StorageInfoReader : public SystemInfoReader
 {
 public:
     StorageInfoReader() = default;
+    const std::u16string_view identifier() override;
     std::unique_ptr<SystemInfo> readInfo() override;
 };
 

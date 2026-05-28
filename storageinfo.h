@@ -3,6 +3,7 @@
 
 #include "core/jsonserializable.h"
 #include "systeminfo.h"
+#include <map>
 
 namespace sysinfoagent {
 
@@ -13,7 +14,7 @@ public:
     explicit DriveState(const QJsonObject &jo);
 
     ~DriveState() override = default;
-    QJsonValue asJson() override;
+    QJsonValue asJson() const override;
 
 private:
     QString deviceName_;
@@ -30,7 +31,9 @@ public:
     explicit StorageInfo(std::map<QString, DriveState> &&drives);
     explicit StorageInfo(const QJsonObject &jo);
     ~StorageInfo() override = default;
-    QJsonValue asJson() override;
+    QJsonValue asJson() const override;
+
+    static constexpr std::u16string_view identifier = u"storage";
 
 private:
     std::map<QString, DriveState> drives_;

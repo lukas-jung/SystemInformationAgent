@@ -8,7 +8,7 @@ namespace core {
 class JsonSerializable
 {
 public:
-    virtual QJsonValue asJson() = 0;
+    virtual QJsonValue asJson() const = 0;
     virtual ~JsonSerializable() = default;
 };
 
