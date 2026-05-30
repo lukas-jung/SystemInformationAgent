@@ -1,10 +1,13 @@
 #include "message.h"
+#include "messagejsonparser.h"
 #include "poller.h"
 #include "storageinfo.h"
 #include "storageinforeader.h"
+#include "storagejsonparser.h"
 #include <iostream>
 #include <QCoreApplication>
 #include <QJsonObject>
+#include <QTimezone>
 
 using namespace std::chrono_literals;
 
@@ -22,6 +25,14 @@ int main(int argc, char *argv[])
 
     // If you do not need a running Qt event loop, remove the call
     // to QCoreApplication::exec() or use the Non-Qt Plain C++ Application template.
+
+    QDateTime dt = QDateTime::fromString(QString(""), Qt::ISODateWithMs);
+    std::cout << dt.isValid() << dt.toString(Qt::ISODateWithMs).toStdString() << std::endl;
+    if (!dt.isValid()) {
+        dt = QDateTime::fromMSecsSinceEpoch(0, QTimeZone::UTC);
+    }
+
+    std::cout << dt.isValid() << dt.toString(Qt::ISODateWithMs).toStdString() << std::endl;
 
     {
         sysinfoagent::StorageInfoReader reader{};
@@ -49,7 +60,15 @@ int main(int argc, char *argv[])
     QObject::connect(&poller,
                      &sysinfoagent::Poller::messageGenerated,
                      [](std::shared_ptr<sysinfoagent::Message> msg) {
-                         std::cout << msg->asJson().toJson().toStdString() << std::endl;
+                         std::string s1 = msg->asJson().toJson().toStdString();
+                         std::cout << s1 << std::endl;
+                         QJsonValue jv = QJsonValue::fromJson(s1);
+                         sysinfoagent::MessageJsonParser parser;
+                         parser.registerInfoParser(
+                             std::make_unique<sysinfoagent::StorageInfoJsonParser>());
+                         auto msg2 = parser.parseJson(jv);
+                         std::string s2 = msg2->asJson().toJson().toStdString();
+                         std::cout << "s1 == s2: " << (s1 == s2) << std::endl;
                      });
     poller.startPollingEveryNSeconds(1s);
 

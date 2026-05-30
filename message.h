@@ -14,13 +14,12 @@ class Message : core::JsonSerializable
 {
 public:
     Message();
-    Message(std::map<const QString, std::unique_ptr<SystemInfo>> &&sysInfos);
     void addSysInfo(const QString &identifier, std::unique_ptr<SystemInfo> sysInfo);
 
-    QJsonValue asJson() const override;
-
     void setTimeStamp(QDateTime timestamp) { timestamp_ = timestamp; }
-    QDateTime timestamp() { return timestamp_; }
+    QDateTime timestamp() const { return timestamp_; }
+
+    QJsonValue asJson() const override;
 
 private:
     QDateTime timestamp_;

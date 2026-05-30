@@ -21,6 +21,7 @@ qt_add_executable(SystemInformationAgent
     storagejsonparser.h
     message.h message.cpp
     poller.h poller.cpp
+    messagejsonparser.h messagejsonparser.cpp
 )
 
 target_link_libraries(SystemInformationAgent
