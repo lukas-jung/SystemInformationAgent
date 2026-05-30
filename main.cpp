@@ -2,8 +2,8 @@
 #include "messagejsonparser.h"
 #include "poller.h"
 #include "storageinfo.h"
+#include "storageinfojsonparser.h"
 #include "storageinforeader.h"
-#include "storagejsonparser.h"
 #include <iostream>
 #include <QCoreApplication>
 #include <QJsonObject>
