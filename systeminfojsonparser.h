@@ -10,10 +10,10 @@ namespace sysinfoagent {
 class SystemInfoJsonParser
 {
 public:
-    virtual const std::string_view identifier() = 0;
-    virtual std::unique_ptr<SystemInfo> parseJson(const QJsonValue &json) = 0;
+    virtual const std::u16string_view identifier() const = 0;
+    virtual std::unique_ptr<SystemInfo> parseJson(const QJsonValue &json) const = 0;
 
-    ~SystemInfoJsonParser() = default;
+    virtual ~SystemInfoJsonParser() = default;
 };
 
 } // namespace sysinfoagent

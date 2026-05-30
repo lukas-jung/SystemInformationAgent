@@ -12,8 +12,8 @@ namespace sysinfoagent {
 class StorageInfoJsonParser : public sysinfoagent::SystemInfoJsonParser
 {
 public:
-    const std::string_view identifier() override { return StorageInfo::identifier; };
-    std::unique_ptr<SystemInfo> parseJson(const QJsonValue &json) override
+    const std::u16string_view identifier() const override { return StorageInfo::identifier; };
+    std::unique_ptr<SystemInfo> parseJson(const QJsonValue &json) const override
     {
         return std::make_unique<StorageInfo>(json.toObject());
     };
