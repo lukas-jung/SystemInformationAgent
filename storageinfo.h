@@ -27,10 +27,12 @@ private:
 class StorageInfo : public SystemInfo
 {
 public:
-    explicit StorageInfo(const std::map<QString, DriveState> &drives);
-    explicit StorageInfo(std::map<QString, DriveState> &&drives);
+    StorageInfo() {}
     explicit StorageInfo(const QJsonObject &jo);
     ~StorageInfo() override = default;
+
+    void addDriveState(const QString &driveId, const DriveState &driveState);
+
     QJsonValue asJson() const override;
 
     static constexpr std::u16string_view identifier = u"storage";

@@ -35,19 +35,16 @@ QJsonValue DriveState::asJson() const
     });
 }
 
-StorageInfo::StorageInfo(const std::map<QString, DriveState> &drives)
-    : drives_(drives)
-{}
-
-StorageInfo::StorageInfo(std::map<QString, DriveState> &&drives)
-    : drives_(std::move(drives))
-{}
-
 StorageInfo::StorageInfo(const QJsonObject &jo)
 {
     for (QJsonObject::const_iterator it = jo.begin(); it != jo.end(); ++it) {
         drives_.emplace(std::make_pair(it.key(), DriveState(it.value().toObject())));
     }
+}
+
+void StorageInfo::addDriveState(const QString &driveId, const DriveState &driveState)
+{
+    drives_.emplace(driveId, driveState);
 }
 
 QJsonValue StorageInfo::asJson() const

@@ -1,7 +1,6 @@
 #include "storageinforeader.h"
 #include "storageinfo.h"
 
-#include <map>
 #include <QStorageInfo>
 #include <QtSystemDetection>
 
@@ -33,20 +32,23 @@ const std::u16string_view StorageInfoReader::identifier()
 
 std::unique_ptr<SystemInfo> StorageInfoReader::readInfo()
 {
-    const QList<QStorageInfo> storageInfos = QStorageInfo::mountedVolumes();
-    std::map<QString, DriveState> drives;
-    for (const QStorageInfo &sInfo : storageInfos) {
-        const QString deviceIdString = sInfo.device().toBase64();
+    // QStorageInfo contains information about one drive. StorageInfo contains information about all drives!
 
-        drives.emplace(std::make_pair(deviceIdString,
-                                      DriveState(getDeviceName(sInfo),
-                                                 sInfo.rootPath(),
-                                                 sInfo.name(),
-                                                 sInfo.bytesTotal(),
-                                                 sInfo.bytesAvailable())));
+    const QList<QStorageInfo> qStorageInfos = QStorageInfo::mountedVolumes();
+
+    auto storageInfo = std::make_unique<StorageInfo>();
+    for (const QStorageInfo &qSInfo : qStorageInfos) {
+        const QString deviceIdString = qSInfo.device().toBase64();
+
+        storageInfo->addDriveState(deviceIdString,
+                                   DriveState(getDeviceName(qSInfo),
+                                              qSInfo.rootPath(),
+                                              qSInfo.name(),
+                                              qSInfo.bytesTotal(),
+                                              qSInfo.bytesAvailable()));
     }
 
-    return std::make_unique<StorageInfo>(std::move(drives));
+    return storageInfo;
 }
 
 } // namespace sysinfoagent
