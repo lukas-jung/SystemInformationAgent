@@ -11,8 +11,7 @@ Poller::Poller(QObject *parent)
 
 void Poller::registerInfoReader(std::unique_ptr<SystemInfoReader> infoReader)
 {
-    auto identifier = infoReader->identifier();
-    infoReaders_.emplace(QString(identifier), std::move(infoReader));
+    infoReaders_.push_back(std::move(infoReader));
 }
 
 void Poller::startPollingEveryNSeconds(std::chrono::seconds n)
@@ -25,8 +24,8 @@ void Poller::pollInfoReaders()
     std::shared_ptr<Message> msg = std::make_unique<Message>();
 
     for (auto it = infoReaders_.cbegin(); it != infoReaders_.cend(); ++it) {
-        const std::pair<const QString, std::unique_ptr<SystemInfoReader>> &e = *it;
-        msg->addSysInfo(e.first, e.second->readInfo());
+        const std::unique_ptr<SystemInfoReader> &r = *it;
+        msg->addSysInfo(r->identifier(), r->readInfo());
     }
 
     msg->setTimeStamp(QDateTime::currentDateTime());

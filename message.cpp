@@ -5,7 +5,7 @@ namespace sysinfoagent {
 
 Message::Message() {}
 
-void Message::addSysInfo(const QString &identifier, std::unique_ptr<SystemInfo> sysInfo)
+void Message::addSysInfo(const std::u16string_view &identifier, std::unique_ptr<SystemInfo> sysInfo)
 {
     sysInfos_.emplace(identifier, std::move(sysInfo));
 }

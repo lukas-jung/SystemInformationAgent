@@ -23,7 +23,7 @@ std::unique_ptr<Message> MessageJsonParser::parseJson(const QJsonValue &json)
     for (auto it = infosJo.constBegin(); it != infosJo.constEnd(); ++it) {
         try {
             auto &parser = infoParsers_.at(it.key());
-            msg->addSysInfo(it.key(), parser->parseJson(it.value()));
+            msg->addSysInfo(parser->identifier(), parser->parseJson(it.value()));
         } catch (const std::out_of_range &_) {
             continue;
         }

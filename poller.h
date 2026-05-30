@@ -4,8 +4,8 @@
 #include "message.h"
 #include "systeminforeader.h"
 #include <chrono>
-#include <map>
 #include <memory>
+#include <vector>
 #include <QObject>
 #include <QTimer>
 
@@ -24,7 +24,7 @@ signals:
     void messageGenerated(std::shared_ptr<sysinfoagent::Message> msg);
 
 private:
-    std::map<const QString, std::unique_ptr<SystemInfoReader>> infoReaders_;
+    std::vector<std::unique_ptr<SystemInfoReader>> infoReaders_;
     QTimer *timer_;
 private slots:
     void pollInfoReaders();
