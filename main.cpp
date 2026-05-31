@@ -43,9 +43,10 @@ int main(int argc, char *argv[])
         std::cout << js1 << std::endl;
 
         auto jvp = QJsonValue::fromJson(js1);
-        sysinfoagent::StorageInfo info2(jvp.toObject());
+        sysinfoagent::StorageInfoJsonParser p;
+        auto info2 = p.parseJson(jvp);
 
-        auto jv2 = info2.asJson();
+        auto jv2 = info2->asJson();
         auto js2 = jv2.toJson().toStdString();
         std::cout << js2 << std::endl;
 

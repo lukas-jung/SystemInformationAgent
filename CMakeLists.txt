@@ -18,7 +18,7 @@ qt_add_executable(SystemInformationAgent
     storageinforeader.h storageinforeader.cpp
     systeminfo.h
     systeminfojsonparser.h
-    storageinfojsonparser.h
+    storageinfojsonparser.h storageinfojsonparser.cpp
     message.h message.cpp
     poller.h poller.cpp
     messagejsonparser.h messagejsonparser.cpp
