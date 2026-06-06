@@ -1,0 +1,6 @@
+#include<QJsonValue>
+
+class SystemInformationService
+{
+    SIGNAL(messageJsonGenerated(QJsonValue msgJson))
+};
