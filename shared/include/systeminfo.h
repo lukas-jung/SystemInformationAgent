@@ -1,7 +1,7 @@
 #ifndef SYSTEMINFO_H
 #define SYSTEMINFO_H
 
-#include "core/jsonserializable.h"
+#include "jsonserializable.h"
 
 namespace sysinfoagent {
 

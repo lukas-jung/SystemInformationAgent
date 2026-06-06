@@ -1,10 +1,7 @@
 #include "message.h"
 #include "messagejsonparser.h"
-#include "poller.h"
 #include "rep_systeminformationservice_replica.h"
 #include "storageinfojsonparser.h"
-#include "storageinforeader.h"
-#include "systeminformationservice.h"
 #include <iostream>
 #include <QCoreApplication>
 #include <QJsonObject>
@@ -14,55 +11,55 @@
 
 using namespace std::chrono_literals;
 
-void playground()
-{
-    QDateTime dt = QDateTime::fromString(QString(""), Qt::ISODateWithMs);
-    std::cout << dt.isValid() << dt.toString(Qt::ISODateWithMs).toStdString() << std::endl;
-    if (!dt.isValid()) {
-        dt = QDateTime::fromMSecsSinceEpoch(0, QTimeZone::UTC);
-    }
+// void playground()
+// {
+//     QDateTime dt = QDateTime::fromString(QString(""), Qt::ISODateWithMs);
+//     std::cout << dt.isValid() << dt.toString(Qt::ISODateWithMs).toStdString() << std::endl;
+//     if (!dt.isValid()) {
+//         dt = QDateTime::fromMSecsSinceEpoch(0, QTimeZone::UTC);
+//     }
 
-    std::cout << dt.isValid() << dt.toString(Qt::ISODateWithMs).toStdString() << std::endl;
+//     std::cout << dt.isValid() << dt.toString(Qt::ISODateWithMs).toStdString() << std::endl;
 
-    {
-        sysinfoagent::StorageInfoReader reader{};
-        auto info1 = reader.readInfo();
+//     {
+//         sysinfoagent::StorageInfoReader reader{};
+//         auto info1 = reader.readInfo();
 
-        auto jv1 = info1->asJson();
-        auto js1 = jv1.toJson().toStdString();
-        std::cout << js1 << std::endl;
+//         auto jv1 = info1->asJson();
+//         auto js1 = jv1.toJson().toStdString();
+//         std::cout << js1 << std::endl;
 
-        auto jvp = QJsonValue::fromJson(js1);
-        sysinfoagent::StorageInfoJsonParser p;
-        auto info2 = p.parseJson(jvp);
+//         auto jvp = QJsonValue::fromJson(js1);
+//         sysinfoagent::StorageInfoJsonParser p;
+//         auto info2 = p.parseJson(jvp);
 
-        auto jv2 = info2->asJson();
-        auto js2 = jv2.toJson().toStdString();
-        std::cout << js2 << std::endl;
+//         auto jv2 = info2->asJson();
+//         auto js2 = jv2.toJson().toStdString();
+//         std::cout << js2 << std::endl;
 
-        std::cout << (js1 == js2);
-    }
+//         std::cout << (js1 == js2);
+//     }
 
-    auto reader = std::make_unique<sysinfoagent::StorageInfoReader>();
+//     auto reader = std::make_unique<sysinfoagent::StorageInfoReader>();
 
-    sysinfoagent::Poller poller(nullptr);
-    poller.registerInfoReader(std::move(reader));
+//     sysinfoagent::Poller poller(nullptr);
+//     poller.registerInfoReader(std::move(reader));
 
-    QObject::connect(&poller,
-                     &sysinfoagent::Poller::messageGenerated,
-                     [](std::shared_ptr<sysinfoagent::Message> msg) {
-                         std::string s1 = msg->asJson().toJson().toStdString();
-                         std::cout << s1 << std::endl;
-                         QJsonValue jv = QJsonValue::fromJson(s1);
-                         sysinfoagent::MessageJsonParser parser;
-                         parser.registerInfoParser(
-                             std::make_unique<sysinfoagent::StorageInfoJsonParser>());
-                         auto msg2 = parser.parseJson(jv);
-                         std::string s2 = msg2->asJson().toJson().toStdString();
-                         std::cout << "s1 == s2: " << (s1 == s2) << std::endl;
-                     });
-    poller.startPollingEveryNSeconds(1s);
-}
+//     QObject::connect(&poller,
+//                      &sysinfoagent::Poller::messageGenerated,
+//                      [](std::shared_ptr<sysinfoagent::Message> msg) {
+//                          std::string s1 = msg->asJson().toJson().toStdString();
+//                          std::cout << s1 << std::endl;
+//                          QJsonValue jv = QJsonValue::fromJson(s1);
+//                          sysinfoagent::MessageJsonParser parser;
+//                          parser.registerInfoParser(
+//                              std::make_unique<sysinfoagent::StorageInfoJsonParser>());
+//                          auto msg2 = parser.parseJson(jv);
+//                          std::string s2 = msg2->asJson().toJson().toStdString();
+//                          std::cout << "s1 == s2: " << (s1 == s2) << std::endl;
+//                      });
+//     poller.startPollingEveryNSeconds(1s);
+// }
 
 int client()
 {
@@ -96,32 +93,6 @@ int client()
     return QCoreApplication::exec();
 }
 
-int server()
-{
-    std::cout << "server started" << std::endl;
-    auto reader = std::make_unique<sysinfoagent::StorageInfoReader>();
-
-    sysinfoagent::Poller poller;
-
-    // QObject::connect(&poller,
-    //                  &sysinfoagent::Poller::messageGenerated,
-    //                  [](std::shared_ptr<sysinfoagent::Message> msg) {
-    //                      std::string s1 = msg->asJson().toJson().toStdString();
-    //                      std::cout << s1 << std::endl;
-    //                  });
-
-    poller.registerInfoReader(std::move(reader));
-
-    sysinfoagent::SystemInformationService service(poller);
-
-    QRemoteObjectHost rObjHost(QUrl("local:sysinfos"));
-    rObjHost.enableRemoting(&service);
-
-    poller.startPollingEveryNSeconds(1s);
-
-    return QCoreApplication::exec();
-}
-
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -138,18 +109,6 @@ int main(int argc, char *argv[])
     // to QCoreApplication::exec() or use the Non-Qt Plain C++ Application template.
 
     // playground();
-    std::cout << "s or c?" << std::endl;
-    std::string s;
 
-    std::cin >> s;
-    if (s.size() > 0 && s[0] == 'c') {
-        // if (s == 'c') {
-        return client();
-    } else {
-        std::cout << s.size();
-        return server();
-    }
-
-    // return QCoreApplication::exec();
-    return 0;
+    return client();
 }

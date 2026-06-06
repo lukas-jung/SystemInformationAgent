@@ -3,7 +3,8 @@
 namespace sysinfoagent {
 
 SystemInformationService::SystemInformationService(Poller &poller, QObject *parent)
-    : poller_(poller)
+    : SystemInformationServiceSource(parent)
+    , poller_(poller)
 {
     connect(&poller_, &Poller::messageGenerated, this, &SystemInformationService::sendMessageAsJson);
 }

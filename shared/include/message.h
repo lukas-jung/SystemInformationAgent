@@ -1,7 +1,7 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
-#include "core/jsonserializable.h"
+#include "jsonserializable.h"
 #include "systeminfo.h"
 #include <map>
 #include <memory>

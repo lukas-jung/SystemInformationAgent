@@ -1,7 +1,7 @@
 #ifndef STORAGEINFO_H
 #define STORAGEINFO_H
 
-#include "core/jsonserializable.h"
+#include "jsonserializable.h"
 #include "systeminfo.h"
 #include <map>
 
